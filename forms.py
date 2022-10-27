@@ -6,8 +6,15 @@ from wtforms.validators import InputRequired, Length, NumberRange, URL, Optional
 
 class AddPetForm(FlaskForm):
   '''Easy form to add pets.'''
-  name = StringField('Pet Name', validators=[InputRequired()]),
-  species = StringField('Species'),
-  photo_url = StringField('Photo URL'),
-  age = IntegerField('Age'),
-  notes = TextAreaField('Notes')
+  name = StringField('Pet Name', validators=[InputRequired()])
+  species = SelectField('Species', choices=[("cat", "Cat"), ("dog", "Dog"), ("porcupine", "Porcupine")])
+  photo_url = StringField('Photo URL', validators=[Optional(), URL()])
+  age = IntegerField('Age', validators=[Optional(), NumberRange(min=0, max=30)])
+  notes = TextAreaField('Notes', validators=[Optional()])
+
+
+class EditPetForm(FlaskForm):
+  '''Form to edit pet info.'''
+  photo_url = StringField('Photo URL', validators=[Optional(), URL()])
+  notes = TextAreaField('Notes', validators=[Optional()])
+  available = BooleanField('Available', default=True)
