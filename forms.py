@@ -6,7 +6,7 @@ from wtforms.validators import InputRequired, Length, NumberRange, URL, Optional
 
 class AddPetForm(FlaskForm):
   '''Easy form to add pets.'''
-  name = StringField('Pet Name'),
+  name = StringField('Pet Name', validators=[InputRequired()]),
   species = StringField('Species'),
   photo_url = StringField('Photo URL'),
   age = IntegerField('Age'),
